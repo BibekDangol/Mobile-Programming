@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<style>
+.Content{
+  background-color: tomato;
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+.hide{
+  background-color: rgb(255, 206, 71);
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+.show{
+  background-color: rgb(95, 255, 71);
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+.background
+{
+  background-color: rgb(71, 200, 255);
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+.image{
+  background-color: rgb(126, 71, 255);
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+.calculate{
+  background-color: rgb(255, 71, 71);
+  color: white;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+</style>
+<body>
+
+
+
+<div class = "Content">
+    <h2>Change content</h2>
+    <p id="demo">JavaScript can change HTML content.</p>
+    <button type="button" onclick='document.getElementById("demo").innerHTML = "Hello JavaScript!"'>Click Me!</button>
+</div>
+<div class="hide">
+    <h2>Hide content</h2>
+    <p id="demo1">JavaScript can Hide HTML content.</p>
+    <button type="button" onclick='document.getElementById("demo1").style.display = "none";'>hide</button>
+</div>
+<div class="show">
+    <h2>Show content</h2>
+    <p id="demo2" style="display:none">JavaScript can show HTML content.</p>
+    <button type="button" onclick='document.getElementById("demo2").style.display = "block";'>Show</button>
+</div>
+
+<!-- 1. Changing Image  -->
+<div class="image-container" id="imgDiv">
+    <h2>Changing Image</h2>
+    <img id="myImage" src="a.jpg" alt="Image" width="300">
+    <button type="button" onclick="changeImage()">Change Image</button>
+</div>
+<script src="scripts.js"></script>
+
+<!-- 2. Changing Background -->
+<div class="background" id="myDiv">
+    <h2>Change background</h2>
+    <p id="demo" style="display:none;">JavaScript can change background.</p>
+    <button type="button" onclick="changeBackground()">Change Background</button>
+</div>
+<script src="scripts.js"></script>
+
+<!-- 3. Control Statements  -->
+<div id="myDiv1" style="background-color: lightblue; padding: 20px; margin: 20px;">
+  <h2>Toggle Paragraph</h2>
+  <p id="demo5">This paragraph will be shown or hidden.</p>
+  <button onclick="toggleParagraph()">Show / Hide Paragraph</button>
+</div>
+<script src="scripts.js"></script>
+
+<!-- 4. Operators -->
+<div class="calculate">
+  <h2>Calculate</h2>
+  <p id="demo6">Addition of 5 and 6.</p>
+  <button onclick="calculate()"> Calculate</button>
+</div>
+<script src="scripts.js"></script>
+
+
+</body>
+</html>
