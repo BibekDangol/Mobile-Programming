@@ -1,0 +1,245 @@
+body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f8;
+      color: #333;
+    }
+
+    /* 2. --- Navbar --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #313647;
+      padding: 15px 25px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      color: white;
+      font-size: 26px; /* Slightly larger */
+      font-weight: 700;
+      font-family: 'Quicksand', sans-serif; /* Aesthetic font */
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px; /* More spacing */
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+      padding-bottom: 5px;
+    }
+
+    /* Added a subtle underline hover effect */
+    .nav-links li a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #FFD700;
+        transition: width 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #FFD700; /* Gold color */
+    }
+    
+    .nav-links li a:hover::after {
+        width: 100%;
+    }
+
+
+    /* 3. --- Hamburger Menu --- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 30px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.4s;
+  
+    }
+
+    /* 5. --- Destination Cards --- */
+    .destination-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 50px 10px; /* More top padding */
+    }
+    
+    .destination-container h2 {
+        width: 100%;
+        text-align: center;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #174143;
+    }
+
+    .destination-card {
+      background: white;
+      width: 320px; /* Slightly wider */
+      margin: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Softer shadow */
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-10px); /* More lift */
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15); /* Stronger shadow on hover */
+    }
+
+    .destination-card img {
+      width: 100%;
+      height: 220px; /* Taller image */
+      object-fit: cover;
+    }
+
+    .destination-card h3 {
+      margin: 20px 0 15px 0;
+      color: #174143;
+      font-size: 24px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+    }
+
+    /* New aesthetic button style */
+    .destination-card button {
+      background: linear-gradient(90deg, #4CAF50, #81C784); /* Green gradient */
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px; /* Pill shape */
+      cursor: pointer;
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .destination-card button:hover {
+      background: linear-gradient(90deg, #45a049, #66bb6a);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    /* New aesthetic details section */
+    .destination-card .details {
+      /* Changed from display: none for transition */
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 15px; /* Padding will be applied when 'show' class is added */
+      background: #fafafa; /* Softer background */
+      border-top: 1px solid #eee; /* Lighter border */
+      font-size: 15px;
+      color: #555;
+      line-height: 1.6;
+      transition: all 0.5s ease-in-out;
+    }
+    
+    .destination-card .details.show {
+        max-height: 200px; /* Allow space for content */
+        opacity: 1;
+        padding: 15px; /* Apply padding on show */
+    }
+
+    /* 6. --- Footer --- */
+    .footer {
+        background: #313647;
+        color: #f0f4f8;
+        text-align: center;
+        padding: 30px 20px;
+        margin-top: 40px;
+    }
+    
+    .footer p {
+        margin: 5px 0;
+        font-weight: 300;
+    }
+
+    /* 7. --- Responsive Design --- */
+    @media screen and (max-width: 768px) {
+      .hero h1 {
+          font-size: 2.5rem;
+      }
+      .hero p {
+          font-size: 1rem;
+      }
+    
+      .nav-links {
+        position: fixed;
+        top: 67px; /* Height of the navbar */
+        right: -100%;
+        height: calc(100% - 67px); /* Full height minus navbar */
+        width: 250px;
+        background-color: #313647; /* Consistent color */
+        flex-direction: column;
+        padding-top: 40px; /* Less top padding */
+        gap: 20px;
+        transition: right 0.4s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-links li a {
+        font-size: 20px;
+        padding: 15px 20px; /* Larger tap target */
+        display: block;
+      }
+      
+      .nav-links li a::after {
+          display: none; /* Remove underline effect on mobile nav */
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+    }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourism App - Creative Navbar</title>
+  <link rel="stylesheet" href="w3Assignment.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">Explore Nepal</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#destinations">Destinations</a></li>
+      <li><a href="#">Hotels</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <div class="destination-container" id="destinations">
+    <h2>Popular Destinations</h2>
+    
+    <div class="destination-card">
+      <img src="Phewa Lake.jpg" alt="Pokhara">
+      <h3>Pokhara</h3>
+      <button class="detailsBtn">View Details</button>
+      <div class="details">
+        <p>Pokhara is famous for Phewa Lake, boating, adventure sports, and stunning Himalayan views.</p>
+      </div>
+    </div>
+
+    <div class="destination-card">
+      <img src="kathmandu.jpg" alt="Kathmandu">
+      <h3>Kathmandu</h3>
+      <button class="detailsBtn">View Details</button>
+      <div class="details">
+        <p>Kathmandu, the capital city, is rich in culture, temples, and historic landmarks like Boudhanath Stupa.</p>
+      </div>
+    </div>
+
+    <div class="destination-card">
+      <img src="Lumbini.jpg" alt="Lumbini">
+      <h3>Lumbini</h3>
+      <button class="detailsBtn">View Details</button>
+      <div class="details">
+        <p>Lumbini is the birthplace of Lord Buddha and a UNESCO World Heritage site, attracting pilgrims worldwide.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+      <p class="logo" style="font-size: 22px; margin-bottom: 10px;">Explore Nepal</p>
+      <p>© 2025 - A Tourism App Project</p>
+  </footer>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="w3Assignment.js" defer></script>
+
+</body>
+</html>
