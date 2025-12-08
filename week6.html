@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase CRUD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ====== GLOBAL ====== */
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #EBD5AB; /* Light warm background */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #1B211A; /* Dark text */
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1B211A;
+      margin-bottom: 30px;
+    }
+
+    /* ====== INPUT BAR ====== */
+    .form-card {
+      background: #1B211A; /* Dark card background */
+      padding: 25px;
+      width: 75%;
+      max-width: 800px;
+      border-radius: 15px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .form-card input {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 14px;
+      background: #EBD5AB; /* Highlight input */
+      color: #1B211A;
+      transition: all 0.3s ease;
+    }
+
+    .form-card input:focus {
+      outline: 2px solid #628141; /* Accent focus */
+      background: #fff5e0;
+    }
+
+    .form-card button {
+      padding: 12px 25px;
+      background: #628141; /* Accent button */
+      color: #EBD5AB;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .form-card button:hover {
+      background: #496032;
+      transform: translateY(-2px);
+    }
+
+    /* ====== TABLE CARD ====== */
+    .table-card {
+      background: #1B211A;
+      width: 75%;
+      max-width: 800px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #628141; /* Accent header */
+      color: #EBD5AB;
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 14px 20px;
+      color: #EBD5AB;
+      font-size: 14px;
+      border-bottom: 1px solid #EBD5AB33; /* subtle border */
+    }
+
+    tr:hover td {
+      background: #49603244; /* light hover effect */
+    }
+
+    /* ====== ACTION BUTTONS ====== */
+    .action-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: #EBD5AB;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .edit-btn {
+      background: #628141; 
+    }
+
+    .edit-btn:hover {
+      background: #496032;
+    }
+
+    .delete-btn {
+      background: #E94F37; /* subtle red for delete */
+    }
+
+    .delete-btn:hover {
+      background: #c0372a;
+    }
+
+    @media(max-width: 600px) {
+      .form-card {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Form</h2>
+
+  <div class="form-card">
+    <input type="text" id="nameInput" placeholder="Enter Name">
+    <input type="email" id="emailInput" placeholder="Enter Email">
+    <button id="addBtn">Add Record</button>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th style="width: 180px;">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <script type="module" src="week6.js"></script>
+
+</body>
+</html>
