@@ -41,18 +41,13 @@ document.getElementById("addBtn").addEventListener("click", () => {
 
 
 const usersRef = ref(db, "users");
-
 onValue(usersRef, (snapshot) => {
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
-
   const data = snapshot.val();
-
   if (!data) return;
-
   Object.keys(data).forEach((id) => {
     const user = data[id];
-
     tableBody.innerHTML += `
       <tr>
         <td>${user.name}</td>
