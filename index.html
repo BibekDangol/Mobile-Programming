@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Nepal</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- 1. SIGN IN SCREEN -->
+        <div id="signin-screen" class="screen active">
+            <div class="header-simple" style="padding-top: 80px; text-align: center;">
+                <i class="fas fa-mountain" style="font-size: 3rem; color: #FB6C00; margin-bottom: 20px;"></i>
+                <h1>Travel Nepal</h1>
+                <p>Hi there! Nice to see you again.</p>
+            </div>
+
+            <div class="auth-content">
+                <form id="login-form">
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="login-email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Sign In</button>
+
+                    <p style="text-align: center; margin: 20px 0; font-size: 0.8rem; color: #aaa;">or use one of your
+                        social profiles</p>
+
+                    <div class="social-row">
+                        <button type="button" class="btn-social" style="background-color: #1DA1F2;">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </button>
+                        <button type="button" class="btn-social" style="background-color: #3b5998;">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </button>
+                    </div>
+                </form>
+
+                <div class="auth-footer">
+                    Forgot Password? <br><br>
+                    No account? <span onclick="app.toggleAuth('signup')">Sign Up</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. SIGN UP SCREEN -->
+        <div id="signup-screen" class="screen hidden-right">
+            <!-- Back Button added as requested -->
+            <button class="back-btn-float" onclick="app.toggleAuth('signin')">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+
+            <div class="header-simple" style="padding-top: 60px;">
+                <h1>Sign Up</h1>
+            </div>
+
+            <div class="auth-content" style="justify-content: flex-start;">
+                <form id="signup-form">
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Required" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Required" required>
+                    </div>
+
+                    <div style="margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
+                        <input type="checkbox" style="width: 20px;" required>
+                        <p style="font-size: 0.8rem; color: #888;">By signing up you agree to our Terms of Service and
+                            Privacy Policy.</p>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Continue</button>
+                </form>
+
+                <div class="auth-footer">
+                    Have an account? <span onclick="app.toggleAuth('signin')">Sign In</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. MAIN APP (Wrapper for Tabs) -->
+        <div id="main-app" class="screen hidden-right" style="background-color: #F5F5F5;">
+
+            <!-- Tab: HOME -->
+            <div id="tab-home" class="tab-content" style="display:block;">
+                <div class="home-header">
+                    <h1>Welcome...</h1>
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search places...">
+                    </div>
+                </div>
+                <div class="list-container">
+                    <!-- Cards -->
+                    <div class="list-card">
+                        <img src="kathmandu.png" alt="Kathmandu Stupa">
+                        <div class="list-card-content">
+                            <h3>Kathmandu Valley</h3>
+                            <p>Historical heritage sites and temples.</p>
+                        </div>
+                    </div>
+                    <div class="list-card">
+                        <img src="pokhara.png" alt="Pokhara Lake">
+                        <div class="list-card-content">
+                            <h3>Pokhara Lakeside</h3>
+                            <p>Serene lakes and mountain views.</p>
+                        </div>
+                    </div>
+                    <div class="list-card">
+                        <img src="chitwan.png" alt="Chitwan Safari">
+                        <div class="list-card-content">
+                            <h3>Chitwan National Park</h3>
+                            <p>Wildlife safari and nature.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: CAMERA (Renamed from tab-saved, fully implemented) -->
+            <div id="tab-camera" class="tab-content"
+                style="display:none; height: 100vh; background: black; position: relative;">
+                <!-- Back Button -->
+                <button class="back-btn-overlay" onclick="app.switchTab('home')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+
+                <video id="camera-feed" autoplay playsinline
+                    style="width: 100%; height: 100%; object-fit: cover;"></video>
+
+                <div class="camera-controls">
+                    <button class="shutter-btn" onclick="app.takePhoto()"></button>
+                </div>
+            </div>
+
+            <!-- Tab: MAP (Leaflet) -->
+            <div id="tab-map" class="tab-content" style="display:none; height: 100vh; position: relative;">
+                <!-- Back Button -->
+                <button class="back-btn-overlay" onclick="app.switchTab('home')"
+                    style="background: white; color: black;">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+
+                <div id="map-container" style="width: 100%; height: 100%;"></div>
+            </div>
+
+            <!-- Tab: PROFILE -->
+            <div id="tab-profile" class="tab-content" style="display:none; height: 100%; background: white;">
+                <div class="header-simple">
+                    <button onclick="app.switchTab('home')"
+                        style="border:none; background:none; font-size:1rem; color: #009638; cursor: pointer;">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <div style="display: flex; justify-content: center; margin: 20px 0;">
+                        <div
+                            style="width: 80px; height: 80px; background: #ddd; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                            <i class="fas fa-user" style="font-size: 2rem; color: #fff;"></i>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding: 24px;">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" id="profile-name">
+                    </div>
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <input type="email" id="profile-email">
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="profile-phone" placeholder="+977 9800000000">
+                    </div>
+
+                    <button class="btn-primary" id="save-profile-btn"
+                        style="background: var(--primary-teal); margin-bottom: 16px;">Save Changes</button>
+                    <button class="btn-primary" id="logout-btn" style="background-color: #424242;">Log Out</button>
+                </div>
+            </div>
+
+            <!-- BOTTOM NAV -->
+            <nav class="bottom-nav">
+                <!-- Home: Brown/Orange House -->
+                <div class="nav-item active" onclick="app.switchTab('home')">
+                    <i class="fas fa-home" style="color: #D35400;"></i>
+                    <span>Home</span>
+                </div>
+                <!-- Camera: Grey Camera -->
+                <div class="nav-item" onclick="app.switchTab('camera')">
+                    <i class="fas fa-camera" style="color: #555;"></i>
+                    <span>Camera</span>
+                </div>
+                <!-- Explore: Red Pin -->
+                <div class="nav-item" onclick="app.switchTab('explore')">
+                    <i class="fas fa-thumbtack" style="color: #E74C3C; transform: rotate(45deg);"></i>
+                    <span>Explore</span>
+                </div>
+                <!-- Profile: Blue Group -->
+                <div class="nav-item" onclick="app.switchTab('profile')">
+                    <i class="fas fa-user-friends" style="color: #2980B9;"></i>
+                    <span>Profile</span>
+                </div>
+            </nav>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>

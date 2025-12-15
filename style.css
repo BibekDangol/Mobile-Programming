@@ -1,0 +1,467 @@
+/* 
+  Travel Nepal - Wireframe Redesign
+  Style Guide: Orange (#FB6C00), Teal (#009638), Grey (#424242)
+*/
+
+:root {
+    /* Brand Colors */
+    --primary-orange: #FB6C00;
+    --primary-teal: #009638;
+    --text-dark: #424242;
+    --text-grey: #8a8a8a;
+    --bg-main: #F5F5F5;
+    --card-bg: #FFFFFF;
+    --input-bg: #F9F9F9;
+
+    /* UI Tokens */
+    --radius-lg: 30px;
+    /* Outline style in Style Guide looks very rounded */
+    --radius-md: 12px;
+    --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    /* Typography */
+    --font-main: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: #E0E0E0;
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Mobile Container */
+.app-container {
+    width: 100%;
+    max-width: 414px;
+    height: 100vh;
+    max-height: 896px;
+    background-color: var(--bg-main);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 480px) {
+    .app-container {
+        height: 90vh;
+        border-radius: 40px;
+        border: 8px solid #333;
+        /* Phone frame simulation */
+    }
+}
+
+/* Screen Management */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Changed: Fix container */
+    background-color: var(--bg-main);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
+.screen.hidden-left {
+    transform: translateX(-50px);
+}
+
+.screen.hidden-right {
+    transform: translateX(50px);
+}
+
+/* Tab Scrolling */
+.tab-content {
+    height: 100%;
+    overflow-y: auto;
+    /* Enable scroll here */
+    -webkit-overflow-scrolling: touch;
+}
+
+.tab-content::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+/* Buttons */
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #FB6C00 0%, #FF8F00 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(251, 108, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(251, 108, 0, 0.2);
+}
+
+.btn-social {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-social:hover {
+    opacity: 0.9;
+}
+
+/* Back Button Styles */
+.back-btn-float {
+    position: absolute;
+    top: 50px;
+    /* Adjusted for safe area */
+    left: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    /* Frosted glass effect */
+    backdrop-filter: blur(4px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Camera UI */
+.camera-controls {
+    position: absolute;
+    bottom: 100px;
+    /* Above nav */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.shutter-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    border: 5px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.shutter-btn:active {
+    transform: scale(0.9);
+    background: #eee;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 24px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px;
+    background-color: #FAFAFA;
+    border: 2px solid #F0F0F0;
+    border-radius: 12px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-orange);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(251, 108, 0, 0.1);
+}
+
+
+/* Headers */
+.header-simple {
+    padding: 40px 24px 20px;
+    background-color: var(--bg-main);
+}
+
+.header-simple h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.header-simple p {
+    color: var(--text-grey);
+    font-size: 0.9rem;
+}
+
+/* --- Specific Screens --- */
+
+/* --- Specific Screens --- */
+
+/* Auth Screens - Premium Bottom Sheet Design */
+#signin-screen {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('kathmandu.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#signup-screen {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('pokhara.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#signin-screen .header-simple,
+#signup-screen .header-simple {
+    background: transparent;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#signin-screen .header-simple p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.auth-content {
+    background: white;
+    padding: 32px 24px;
+    flex: initial;
+    /* Don't stretch indefinitely, let it be sized by content/min-height */
+    min-height: 65%;
+    /* Take up bottom ~65% */
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Align triggers to top of card */
+    margin-top: auto;
+    /* Push to bottom of flex container */
+}
+
+/* Ensure Logo is white in auth screens */
+#signin-screen .fa-mountain,
+#signup-screen .fa-mountain {
+    color: white !important;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+.social-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: var(--text-grey);
+}
+
+.auth-footer span {
+    color: var(--primary-orange);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Home Screen (List Layout) */
+.home-header {
+    padding: 50px 24px 20px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.search-bar {
+    margin-top: 16px;
+    background-color: #F0F0F0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    color: var(--text-grey);
+}
+
+.search-bar i {
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.list-container {
+    padding: 24px;
+    padding-bottom: 120px;
+    /* Increased from 80px to clear the nav bar completely */
+}
+
+.list-card {
+    background: white;
+    border-radius: 16px;
+    /* Increased radius */
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    /* Premium shadow */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-card:active {
+    transform: scale(0.98);
+}
+
+.list-card img {
+    width: 100%;
+    height: 180px;
+    /* Taller image for better look */
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+.list-card-content {
+    padding: 20px;
+}
+
+.list-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+}
+
+.list-card p {
+    font-size: 0.9rem;
+    color: var(--text-grey);
+    line-height: 1.5;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    /* Taller for labels */
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #eee;
+    z-index: 50;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 60px;
+    height: 100%;
+    color: #999;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: none !important;
+    /* Override previous active block bg */
+    box-shadow: none !important;
+}
+
+.nav-item i {
+    font-size: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.nav-item:active i {
+    transform: scale(0.9);
+}
+
+/* Active Text Color - Matches Screenshot Blue for Label */
+.nav-item.active {
+    color: #2D9CDB;
+}
